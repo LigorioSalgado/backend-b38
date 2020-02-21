@@ -11,7 +11,8 @@ async function start() {
 
 	mongoose.connect(MONGO_URI, {
 		useNewUrlParser: true,
-		useUnifiedTopology: true
+		useUnifiedTopology: true,
+		useCreateIndex:true
 	});
 
 	const mongo = mongoose.connection;
