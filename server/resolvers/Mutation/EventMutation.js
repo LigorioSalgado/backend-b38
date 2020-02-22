@@ -16,10 +16,12 @@ module.exports = {
 						[`${key}.${addressKey}`]: args.data[key][addressKey]
 					};
 				});
+			}else{
+				updateEvent = {...updateEvent,[key]:args.data[key]};
 			}
-			updateEvent = {...updateEvent,[key]:args.data[key]};
 
 		}); 
+		console.log(updateEvent);
 		return Events.findByIdAndUpdate(args.id,{$set:updateEvent},{new:true}).exec();
 	},
 	deleteEvent:(root,args) =>{
