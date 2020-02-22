@@ -1,7 +1,9 @@
-const UserQueries =  require('./UserQuery');
+const UserQueries = require('./UserQuery');
+const EventQueries = require('./EventQuery');
 
 module.exports = {
-	...UserQueries
+	...UserQueries,
+	...EventQueries
 };
 
 /* 
@@ -14,4 +16,4 @@ module.exports = {
 
 
 
-*/ 
+*/
