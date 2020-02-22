@@ -7,7 +7,17 @@ type Query{ #Aqui van todos los queries
 type Mutation{ #Aqui van todos los mutation y modificaciones
 #Post,PUT,PATCH,DELETE
     createUser(data:Useradd!):User!
+    updateUser(id:ID!,data:Userupdate):User!
+    deleteUser(id:ID!):User!
 
+}
+
+input Userupdate{
+    first_name:String
+    last_name:String
+    gender:GENDER
+    birth_date:String
+    photo:String
 }
 
 input Useradd{#Write
@@ -21,7 +31,7 @@ input Useradd{#Write
 }
 
 type User{#Read-only
-    _id:ID!
+    _id:ID
     first_name:String
     last_name:String
     email:String
