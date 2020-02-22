@@ -1,34 +1,31 @@
-const { ApolloServer, gql } = require('apollo-server');
+const { ApolloServer } = require('apollo-server');
+const { importSchema } = require('graphql-import');
 const mongoose = require('mongoose');
+const resolvers = require('./resolvers');
 
-const MONGO_URI = 'mongodb+srv://prueba3:prueba3@cluster0-vp6hz.mongodb.net/b38?retryWrites=true&w=majority';
+async function start() {
+	const typeDefs = await importSchema(__dirname + '/schema.graphql');
 
-mongoose.connect(MONGO_URI,{
-	useNewUrlParser:true,
-	useUnifiedTopology:true
-});
+	const MONGO_URI =
+    'mongodb+srv://prueba3:prueba3@cluster0-vp6hz.mongodb.net/b38?retryWrites=true&w=majority';
 
-const mongo = mongoose.connection;
+	mongoose.connect(MONGO_URI, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+		useCreateIndex:true
+	});
 
-mongo.on('error', error => console.log(error) )
-	.once('open',() => console.log('Connected to database'));
+	const mongo = mongoose.connection;
 
-const typeDefs = gql`
+	mongo
+		.on('error', error => console.log(error))
+		.once('open', () => console.log('Connected to database'));
 
-    type Query{
-        prueba(name:String):String
-    }
+	const server = new ApolloServer({ typeDefs, resolvers });
 
-`;
+	server.listen().then(({ url }) => {
+		console.log(`Server ready set: ${url}`);
+	});
+}
 
-const resolvers = {
-	Query:{
-		prueba: (root,args) => `Hola Mundo ${args.name}`
-	}
-};
-
-const server = new ApolloServer({typeDefs,resolvers});
-
-server.listen().then(({url}) => {
-	console.log(`Server ready set: ${url}`);
-});
+start();
