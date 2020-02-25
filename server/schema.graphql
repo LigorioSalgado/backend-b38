@@ -8,6 +8,7 @@ type Query{ #Aqui van todos los queries
                 date:String
             ):[Event]
     getEvent(id:ID!):Event
+    login(email:String,password:String):String
     
 }
 
