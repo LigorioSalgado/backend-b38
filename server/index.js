@@ -3,6 +3,8 @@ const { ApolloServer } = require('apollo-server');
 const { importSchema } = require('graphql-import');
 const mongoose = require('mongoose');
 const resolvers = require('./resolvers');
+const AuthDirective = require('./resolvers/Directives/AuthDirective');
+const verifyToken = require('./utils/verifyToken');
 
 async function start() {
 	const typeDefs = await importSchema(__dirname + '/schema.graphql');
@@ -22,7 +24,14 @@ async function start() {
 		.on('error', error => console.log(error))
 		.once('open', () => console.log('Connected to database'));
 
-	const server = new ApolloServer({ typeDefs, resolvers });
+	const server = new ApolloServer({ 
+		typeDefs, 
+		resolvers,
+		schemaDirectives:{
+			auth:AuthDirective
+		},
+		context: ({req}) => verifyToken(req)
+	});
 
 	server.listen().then(({ url }) => {
 		console.log(`Server ready set: ${url}`);
