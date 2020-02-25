@@ -80,6 +80,7 @@ type User{#Read-only
     birth_date:String
     gender:GENDER
     photo:String
+    password:String
     events_create:[Event]
     events_assists:[Event]
     is_active:Boolean
