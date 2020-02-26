@@ -1,10 +1,17 @@
 const Users = require('../../models/Users');
-
+const storage = require('../../utils/storage');
 
 
 module.exports = {
 
-	createUser:(root,args) => {
+	createUser:async(root,args) => {
+		if(args.data.photo){
+			//args.data.photos.foreach(photo => {})
+			const { createReadStream } = await args.data.photo;
+			const stream = createReadStream();
+			const image = await storage({ stream });
+			args.data =  {...args.data,photo:image.url};
+		}
 		return Users.create(args.data);
 	},
 	updateUser:(root,args) => {
