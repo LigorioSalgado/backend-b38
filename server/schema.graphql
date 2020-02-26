@@ -1,7 +1,8 @@
+directive @auth on FIELD_DEFINITION
 
 type Query{ #Aqui van todos los queries
-    getUsers(is_active:Boolean):[User]!
-    getUser(id:ID, email:String):User
+    getUsers(is_active:Boolean):[User]!@auth
+    getUser(id:ID, email:String):User@auth
     getEvents(is_active:Boolean,
                 tag:String,
                 city:String,
@@ -15,11 +16,11 @@ type Query{ #Aqui van todos los queries
 type Mutation{ #Aqui van todos los mutation y modificaciones
 #Post,PUT,PATCH,DELETE
     createUser(data:Useradd!):User!
-    updateUser(id:ID!,data:Userupdate):User!
-    deleteUser(id:ID!):User!
-    createEvent(data:Eventadd):Event!
-    updateEvent(id:ID!,data:Eventupdate):Event!
-    deleteEvent(id:ID!):Event
+    updateUser(id:ID!,data:Userupdate):User!@auth
+    deleteUser(id:ID!):User!@auth
+    createEvent(data:Eventadd):Event!@auth
+    updateEvent(id:ID!,data:Eventupdate):Event!@auth
+    deleteEvent(id:ID!):Event@auth
 
 }
 
@@ -29,7 +30,6 @@ input Eventadd {
     description:String!
     date:String!
     address:Addressadd
-    created_by:String
     banner:String
     tags:[String]
 }
