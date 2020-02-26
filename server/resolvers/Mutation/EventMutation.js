@@ -3,7 +3,8 @@ const Events = require('../../models/Events');
 
 module.exports = {
 
-	createEvent:(root,args) =>{
+	createEvent:(root,args,context) =>{
+		args.data.created_by = context.user._id;
 		return Events.create(args.data);
 	},
 	updateEvent:(root, args) =>{
