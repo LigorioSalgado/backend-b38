@@ -19,6 +19,17 @@ const GET_EVENTS = gql`
 
 `;
 
+const CREATE_EVENT = gql`
+
+mutation addEvent($eventData:Eventadd!){
+    createEvent(data:$eventData){
+        _id
+        title
+    }
+
+}
+`;
+
 async function createServer (){
 	const typeDefs = await importSchema('./server/schema.graphql');
 	const schema = makeExecutableSchema({
@@ -29,7 +40,8 @@ async function createServer (){
 		},
 	});
 	const server = new ApolloServer({ 
-		schema
+		schema,
+		context: ({req}) => ({...req,user:{'_id':'3243534534534534'}}) 
 	});
 
 	return server;
@@ -46,6 +58,24 @@ test('Get Events', async() => {
 
 	expect(res).toMatchSnapshot();
 	expect(res.data.getEvents[0].title).toBe('Evento de prueba');
+
+});
+
+test('Create Event', async() => {
+	const test_server  = await createServer();
+
+	const { mutate } =  createTestClient(test_server);
+
+	const res =  await mutate({mutation:CREATE_EVENT,variables:{
+		eventData:{
+			title:'Tests',
+			description:'Test',
+			date:'2020-12-20'
+		}
+	}});
+    
+	expect(res).toMatchSnapshot();
+	expect(res.data.createEvent).toHaveProperty('_id');
 
 });
 

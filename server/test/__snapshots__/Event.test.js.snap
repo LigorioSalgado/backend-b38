@@ -1,5 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Create Event 1`] = `
+Object {
+  "data": Object {
+    "createEvent": Object {
+      "_id": "5e509aed78831c488544c3c7",
+      "title": "Evento de prueba",
+    },
+  },
+  "errors": undefined,
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
 exports[`Get Events 1`] = `
 Object {
   "data": Object {

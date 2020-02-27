@@ -1,11 +1,11 @@
 const Events = require('../../models/Events');
-
+const { createNewEvent } = require('../../services/EventService');
 
 module.exports = {
 
 	createEvent:(root,args,context) =>{
 		args.data.created_by = context.user._id;
-		return Events.create(args.data);
+		return createNewEvent(args.data);
 	},
 	updateEvent:(root, args) =>{
 		let updateEvent = {};
