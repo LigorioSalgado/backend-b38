@@ -4,7 +4,7 @@
   "description": "",
   "main": "server/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "dev": "nodemon server/index.jsg"
   },
   "author": "Edwin Salgado",
@@ -16,6 +16,7 @@
     "dotenv": "^8.2.0",
     "graphql": "^14.6.0",
     "graphql-import": "^1.0.0-beta.2",
+    "graphql-tools": "^4.0.7",
     "jest": "^25.1.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.1",

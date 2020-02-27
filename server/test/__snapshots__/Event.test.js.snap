@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Get Events 1`] = `
+Object {
+  "data": Object {
+    "getEvents": Array [
+      Object {
+        "_id": "5e509aed78831c488544c3c7",
+        "description": "Este es un evento de pruebas bien chido",
+        "title": "Evento de prueba",
+      },
+      Object {
+        "_id": "5e509aed78831c488544c3c7",
+        "description": "Este es un evento de pruebas bien chido",
+        "title": "Evento de prueba",
+      },
+      Object {
+        "_id": "5e509aed78831c488544c3c7",
+        "description": "Este es un evento de pruebas bien chido",
+        "title": "Evento de prueba",
+      },
+    ],
+  },
+  "errors": undefined,
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;

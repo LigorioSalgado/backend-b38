@@ -1,3 +1,4 @@
+scalar Upload
 directive @auth on FIELD_DEFINITION
 
 type Query{ #Aqui van todos los queries
@@ -30,7 +31,7 @@ input Eventadd {
     description:String!
     date:String!
     address:Addressadd
-    banner:String
+    banner:Upload
     tags:[String]
 }
 
@@ -70,7 +71,7 @@ input Useradd{#Write
     password:String!
     birth_date:String
     gender:GENDER
-    photo:String
+    photo:Upload
 }
 
 type User{#Read-only
