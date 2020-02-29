@@ -31,14 +31,21 @@ async function start() {
 		schemaDirectives:{
 			auth:AuthDirective
 		},
+
 	});	
 
 	const server = new ApolloServer({ 
 		schema,
-		context: ({req}) => verifyToken(req)
+		context: ({req}) => verifyToken(req),
+		cors:{
+			origin:process.env.WHITHELIST.split(',')
+		}
+	
 	});
 
-	server.listen().then(({ url }) => {
+	const PORT = process.env.PORT || 4000;
+
+	server.listen({port:PORT}).then(({ url }) => {
 		console.log(`Server ready set: ${url}`);
 	});
 }
