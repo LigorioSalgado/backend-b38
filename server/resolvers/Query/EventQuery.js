@@ -1,14 +1,14 @@
 const Events = require('../../models/Events');
-
+const { allEvents } = require('../../services/EventService');
 
 module.exports = {
 
 	getEvents:(root,args) => {
-		if(args.is_active || args.date) return Events.find({args}).populate('created_by').exec();
-		if(args.city) return Events.find({'address.city':args.city}).populate('created_by').exec();
-		if(args.tag) return Events.find({tags:{$in:[args.tag]}}).populate('created_by').exec(); 
+		if(args.is_active || args.date) return allEvents({args});
+		if(args.city) return allEvents({'address.city':args.city});
+		if(args.tag) return allEvents({tags:{$in:[args.tag]}});
         
-		return Events.find().populate('created_by').exec();
+		return allEvents({});
 		/*Events.find({'address.city':args.city},{tags:{$in:[args.tag]}},{date:args.date}).exec(); */
 	},
 	getEvent: (root,args) => {
