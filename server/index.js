@@ -38,7 +38,7 @@ async function start() {
 		schema,
 		context: ({req}) => verifyToken(req),
 		cors:{
-			origin:process.env.WHITHELIST.split(',')
+			origin:process.env.WHITELIST.split(',')
 		}
 	
 	});
