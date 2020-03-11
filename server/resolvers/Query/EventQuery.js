@@ -12,7 +12,7 @@ module.exports = {
 		/*Events.find({'address.city':args.city},{tags:{$in:[args.tag]}},{date:args.date}).exec(); */
 	},
 	getEvent: (root,args) => {
-		return Events.findOne({_id:args.id}).exec();
+		return Events.findOne({_id:args.id}).populate('created_by').exec();
 	}
 
 
